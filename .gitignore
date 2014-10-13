@@ -2,3 +2,5 @@
 node_modules
 .editorconfig
 .jshintrc
+*.sublime-project
+*.sublime-workspace
