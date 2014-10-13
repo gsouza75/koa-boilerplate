@@ -1,7 +1,7 @@
 'use strict';
 
 var parse = require('co-body');
-var View = require('../helpers/view');
+var View = require('../helpers/View');
 
 
 var messages = [

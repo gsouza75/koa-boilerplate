@@ -1,6 +1,6 @@
 'use strict';
 
-var ErrorView = require('../helpers/error_view');
+var ErrorView = require('../helpers/ErrorView');
 
 module.exports = {
 
