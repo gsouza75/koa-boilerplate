@@ -1,4 +1,4 @@
 koa-boilerplate
 ===============
 
-Boilerplate setup for Koa apps
+Boilerplate setup for Koa apps.
