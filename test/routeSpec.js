@@ -1,6 +1,8 @@
 /*global describe, it*/
 'use strict';
-let superagent = require('supertest'),
+
+let
+  superagent = require('supertest'),
   app = require('../app');
 
 function request() {

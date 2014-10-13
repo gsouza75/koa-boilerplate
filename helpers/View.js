@@ -1,6 +1,7 @@
 'use strict';
 
-let _ = require('lodash'),
+let 
+  _ = require('lodash'),
   config = require('../config');
 
 
