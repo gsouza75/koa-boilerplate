@@ -7,7 +7,7 @@ var serve = require('koa-static');
 var route = require('koa-route');
 var koa = require('koa');
 var path = require('path');
-var error
+var config = require('./config')
 var app = module.exports = koa();
 
 // Logger
@@ -27,6 +27,9 @@ app.use(serve(path.join(__dirname, 'public')));
 app.use(compress());
 
 if (!module.parent) {
-  app.listen(3000);
-  console.log('listening on port 3000');
+	console.log('Starting app %s with config:', config.name);
+	console.dir(config);
+	let port = config.port;
+  app.listen(port);
+  console.log('\nListening on port %d', port);
 }

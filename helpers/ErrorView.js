@@ -19,7 +19,7 @@ ErrorView.prototype = Object.create(View.prototype);
 
 ErrorView.prototype.constructor = ErrorView;
 
-ErrorView.prototype.defaultOptions = {
+ErrorView.prototype.defaults = {
 	status: 500,
 	templateName: 'error'
 };
