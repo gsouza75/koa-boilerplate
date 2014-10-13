@@ -1,10 +1,11 @@
 'use strict';
 
-var parse = require('co-body');
-var View = require('../helpers/View');
+let
+  parse = require('co-body'),
+  View = require('../helpers/View');
 
 
-var messages = [
+let messages = [
   { id: 0, message: 'Koa next generation web framework for node.js' },
   { id: 1, message: 'Koa is a new web framework designed by the team behind Express' }
 ];
@@ -21,7 +22,7 @@ module.exports.list = function *list() {
 };
 
 module.exports.fetch = function *fetch(id) {
-  var message = messages[id];
+  let message = messages[id];
   if (!message) {
     this.throw(404, 'message with id = ' + id + ' was not found');
   }
@@ -29,8 +30,8 @@ module.exports.fetch = function *fetch(id) {
 };
 
 module.exports.create = function *create() {
-  var message = yield parse(this);
-  var id = messages.push(message) - 1;
+  let message = yield parse(this);
+  let id = messages.push(message) - 1;
   message.id = id;
   this.redirect('/');
 };

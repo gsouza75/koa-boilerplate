@@ -1,7 +1,7 @@
 'use strict';
 
-let config = require('./config');
-let middleware = require('./middleware');
+let config = require('./config'),
+	middleware = require('./middleware');
 
 
 function App() {}

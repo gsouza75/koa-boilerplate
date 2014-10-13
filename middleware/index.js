@@ -1,6 +1,6 @@
 'use strict';
 
-var ErrorView = require('../helpers/ErrorView');
+let ErrorView = require('../helpers/ErrorView');
 
 module.exports = {
 
@@ -8,8 +8,8 @@ module.exports = {
 	  try {
 	    yield next;
 	  } catch (err) {
-	    let errorView = new ErrorView(this, err);
-	    let rendered = errorView.render();
+	    let errorView = new ErrorView(this, err),
+	    	rendered = errorView.render();
 	    this.body = typeof rendered === 'string' ? rendered : yield rendered;
 
 	    // since we handled this manually we'll

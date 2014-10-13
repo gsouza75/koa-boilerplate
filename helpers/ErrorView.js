@@ -1,6 +1,6 @@
 'use strict';
 
-var View = require('./View');
+let View = require('./View');
 
 
 function ErrorView(context, error, options) {

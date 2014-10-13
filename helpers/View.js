@@ -1,7 +1,7 @@
 'use strict';
 
-var _ = require('lodash');
-var config = require('../config');
+let _ = require('lodash'),
+  config = require('../config');
 
 
 function View(context, content, options) {

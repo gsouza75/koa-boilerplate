@@ -1,7 +1,7 @@
 /*global describe, it*/
 'use strict';
-var superagent = require('supertest');
-var app = require('../app');
+let superagent = require('supertest'),
+  app = require('../app');
 
 function request() {
 	return superagent(app.listen());

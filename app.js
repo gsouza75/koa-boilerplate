@@ -1,14 +1,14 @@
 'use strict';
-var messages = require('./controllers/messages');
-var middleware = require('./middleware')
-var compress = require('koa-compress');
-var logger = require('koa-logger');
-var serve = require('koa-static');
-var route = require('koa-route');
-var koa = require('koa');
-var path = require('path');
-var config = require('./config')
-var app = module.exports = koa();
+let messages = require('./controllers/messages');
+let middleware = require('./middleware')
+let compress = require('koa-compress');
+let logger = require('koa-logger');
+let serve = require('koa-static');
+let route = require('koa-route');
+let koa = require('koa');
+let path = require('path');
+let config = require('./config')
+let app = module.exports = koa();
 
 // Logger
 app.use(logger());
