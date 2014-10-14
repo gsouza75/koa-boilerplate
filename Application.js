@@ -1,22 +1,61 @@
 'use strict';
 
 let
-	compress = require('koa-compress'), 
+	compress = require('koa-compress'),
 	config = require('./config'),
-	controller = require('./controllers'),
 	koa = require('koa'),
 	logger = require('koa-logger'),
-	middleware = require('./middleware'),
+	middlewares = require('./middlewares'),
 	path = require('path'),
 	route = require('koa-route'),
-	static = require('koa-static');
+	routes = require('./routes'),
+	serve = require('koa-static'),
+	View = require('./helpers/View');
 
 
-function App() {}
+function App() {
+	this.koaApp = koa();
+	this.config = config;
+	this.routes = routes;
 
-App.prototype.setMiddleware = function () {};
+	this.applyMiddlewares();
+}
 
-App.prototype.start = function () {};
+App.prototype.applyMiddlewares = function () {
+	this.koaApp.use(logger());
+	this.applyCustomMiddlewares();
+	this.applyRouteHandlers();
+	this.koaApp.use(serve(this.config.staticDir));
+	this.koaApp.use(compress());
+};
+
+App.prototype.applyCustomMiddlewares = function () {
+	for (let middleware in middlewares) {
+		this.koaApp.use(middlewares[middleware]);
+	}
+};
+
+App.prototype.applyRouteHandlers = function () {
+	for (let verb in this.routes) {
+		let handlers = this.routes[verb];
+		for (let urlPath in handlers) {
+			let handler = handlers[urlPath];
+			this.koaApp.use(route[verb](urlPath, handler));
+		}
+	}
+};
+
+App.prototype.start = function () {
+	let config = this.config,
+		port = config.port;
+
+	console.log('Starting app %s with config:', config.name);
+	console.dir(config);
+
+  this.koaApp.listen(port);
+
+  console.log('\nListening on port %d', port);
+};
 
 
 module.exports = App;

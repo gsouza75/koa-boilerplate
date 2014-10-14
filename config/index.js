@@ -16,6 +16,8 @@ Config.prototype.defaults = {
 
 	port: 3000,
 
+	staticDir: path.join(__dirname, '..', 'public'),
+
 	template: function () {
 		return viewEngine('views', {
 		  map: {
