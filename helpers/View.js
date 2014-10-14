@@ -36,11 +36,11 @@ View.prototype.setMediaType = function () {
     switch (mediaType) {
       case 'json': 
       case 'html':
-        case 'text':
-            this.mediaType = this.context.type = mediaType;
-            break;
-        default:
-          this.context.throw(406, 'Cannot serve media type ' + mediaType);
+      case 'text':
+          this.mediaType = this.context.type = mediaType;
+          break;
+      default:
+        this.context.throw(406, 'Cannot serve media type ' + mediaType);
     }
 };
 
