@@ -2,6 +2,7 @@
 
 let ErrorView = require('../helpers/ErrorView');
 
+
 module.exports = {
 
 	error: function *(next) {
@@ -10,6 +11,7 @@ module.exports = {
 	  } catch (err) {
 	    let errorView = new ErrorView(this, err),
 	    	rendered = errorView.render();
+	    	
 	    this.body = typeof rendered === 'string' ? rendered : yield rendered;
 
 	    // since we handled this manually we'll
@@ -18,6 +20,11 @@ module.exports = {
 	    // centralized still functions correctly.
 	    this.app.emit('error', err, this);
 	  }
+	},
+
+	removeHeaders: function *(next) {
+		this.response.remove('X-Powered-By');
+		yield next;
 	}
 
 };
