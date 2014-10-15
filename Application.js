@@ -6,7 +6,6 @@ let
 	koa = require('koa'),
 	logger = require('koa-logger'),
 	middlewares = require('./middlewares'),
-	path = require('path'),
 	route = require('koa-route'),
 	routes = require('./routes'),
 	serve = require('koa-static'),
@@ -17,7 +16,6 @@ function App() {
 	this.koaApp = koa();
 	this.config = config;
 	this.routes = routes;
-
 	this.applyMiddlewares();
 }
 
@@ -36,11 +34,26 @@ App.prototype.applyCustomMiddlewares = function () {
 };
 
 App.prototype.applyRouteHandlers = function () {
+	let self = this;
+
 	for (let verb in this.routes) {
 		let handlers = this.routes[verb];
+
 		for (let urlPath in handlers) {
 			let handler = handlers[urlPath];
-			this.koaApp.use(route[verb](urlPath, handler));
+			this.koaApp.use(route[verb](urlPath, function *() {
+				let returnValue = handler.apply(this, arguments);
+				
+				if (returnValue === -1) return;
+
+				if (returnValue instanceof View) {
+					returnValue = returnValue.render();
+				}
+
+				this.body = typeof returnValue === 'string' ?
+					returnValue :
+					yield returnValue;
+			}));
 		}
 	}
 };

@@ -11,22 +11,20 @@ let messages = [
 ];
 
 
-module.exports.home = function *home() {
-  let view = new View(this, { messages: messages }, { templateName: 'list' });
-  let rendered = view.render();
-  this.body = typeof rendered === 'string' ? rendered : yield rendered;
+module.exports.home = function home() {
+  return new View(this, { messages: messages }, { templateName: 'list' });
 };
 
-module.exports.list = function *list() {
-  this.body = yield messages;
+module.exports.list = function list() {
+  return messages;
 };
 
-module.exports.fetch = function *fetch(id) {
+module.exports.fetch = function fetch(id) {
   let message = messages[id];
   if (!message) {
     this.throw(404, 'message with id = ' + id + ' was not found');
   }
-  this.body = yield message;
+  return message;
 };
 
 module.exports.create = function *create() {
@@ -34,6 +32,7 @@ module.exports.create = function *create() {
   let id = messages.push(message) - 1;
   message.id = id;
   this.redirect('/');
+  return -1;
 };
 
 function doSomeAsync() {
@@ -45,6 +44,6 @@ function doSomeAsync() {
 }
 
 // One way to deal with asynchronous call
-module.exports.delay = function *delay() {
-  this.body = yield doSomeAsync();
+module.exports.delay = function delay() {
+  return doSomeAsync();
 };
