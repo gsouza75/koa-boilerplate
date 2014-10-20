@@ -41,10 +41,9 @@ App.prototype.applyRouteHandlers = function () {
 
 		for (let urlPath in handlers) {
 			let handler = handlers[urlPath];
+
 			this.koaApp.use(route[verb](urlPath, function *() {
 				let returnValue = handler.apply(this, arguments);
-				
-				if (returnValue === -1) return;
 
 				if (returnValue instanceof View) {
 					returnValue = returnValue.render();

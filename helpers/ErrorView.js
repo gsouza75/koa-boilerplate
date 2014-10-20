@@ -7,7 +7,7 @@ function ErrorView(context, error, options) {
 	View.apply(this, arguments);
 
 	let errorStatus = error.status;
-	if (errorStatus != null) {
+	if (errorStatus) {
 		this.status = errorStatus;
 	}
 

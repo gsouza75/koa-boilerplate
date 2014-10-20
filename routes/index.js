@@ -1,7 +1,6 @@
 'use strict';
 
-// let controllers = require('../controllers'),
-let	messages = require('../controllers/messages'); //controllers.messages;
+let	messages = require('../controllers/messages');
 
 
 module.exports = {

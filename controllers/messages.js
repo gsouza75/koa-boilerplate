@@ -32,7 +32,7 @@ module.exports.create = function *create() {
   let id = messages.push(message) - 1;
   message.id = id;
   this.redirect('/');
-  return -1;
+  return 0;
 };
 
 function doSomeAsync() {
