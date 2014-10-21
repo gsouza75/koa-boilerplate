@@ -6,8 +6,14 @@ let
 
 
 let messages = [
-  { id: 0, message: 'Koa next generation web framework for node.js' },
-  { id: 1, message: 'Koa is a new web framework designed by the team behind Express' }
+  {
+    id: 0,
+    message: 'Koa next generation web framework for node.js'
+  },
+  {
+    id: 1,
+    message: 'Koa is a new web framework designed by the team behind Express'
+  }
 ];
 
 
@@ -38,7 +44,8 @@ module.exports.create = function *create() {
 function doSomeAsync() {
   return function (callback) {
     setTimeout(function () {
-      callback(null, 'this was loaded asynchronously and it took 3 seconds to complete');
+      callback(null,
+        'this was loaded asynchronously and it took 3 seconds to complete');
     }, 3000);
   };
 }
