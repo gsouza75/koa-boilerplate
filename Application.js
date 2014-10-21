@@ -46,7 +46,11 @@ App.prototype.applyRouteHandlers = function () {
 				let returnValue = handler.apply(this, arguments);
 
 				if (returnValue instanceof View) {
-					returnValue = returnValue.render();
+					returnValue = returnValue
+						.setContext(this)
+						.setStatus()
+						.setMediaType()
+						.render();
 				}
 
 				this.body = typeof returnValue === 'string' ?

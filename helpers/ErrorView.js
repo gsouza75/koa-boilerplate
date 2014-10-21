@@ -1,9 +1,11 @@
 'use strict';
 
-let View = require('./View');
+let 
+  _ = require('lodash'),
+  View = require('./View');
 
 
-function ErrorView(context, error, options) {
+function ErrorView(template, error, options) {
 	View.apply(this, arguments);
 
 	let errorStatus = error.status;
@@ -11,7 +13,7 @@ function ErrorView(context, error, options) {
 		this.status = errorStatus;
 	}
 
-	this.setStatus();
+	// this.setStatus();
 	this.content = { message: error.message, status: this.status };
 }
 
@@ -21,7 +23,7 @@ ErrorView.prototype.constructor = ErrorView;
 
 ErrorView.prototype.defaults = {
 	status: 500,
-	templateName: 'error'
+	template: 'error'
 };
 
 

@@ -12,7 +12,7 @@ let messages = [
 
 
 module.exports.home = function home() {
-  return new View(this, { messages: messages }, { templateName: 'list' });
+  return new View('list', { messages: messages });
 };
 
 module.exports.list = function list() {

@@ -9,12 +9,18 @@ module.exports = {
     try {
       yield next;
     } catch (err) {
-      let errorView = new ErrorView(this, err),
-      rendered = errorView.render();
+      let errorView = new ErrorView('error', err),
+        rendered;
+
+        rendered = errorView
+          .setContext(this)
+          .setStatus()
+          .setMediaType()
+          .render();
       
       this.body = typeof rendered === 'string' ? 
-      rendered : 
-      yield rendered;
+        rendered : 
+        yield rendered;
 
       // since we handled this manually we'll
       // want to delegate to the regular app
