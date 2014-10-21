@@ -1,18 +1,18 @@
 'use strict';
 
-let	messages = require('../controllers/messages');
+let messages = require('../controllers/messages');
 
 
 module.exports = {
 
-	get: {
-		'/': messages.home,
-		'/messages': messages.list,
-		'/messages/:id': messages.fetch,
-		'/async': messages.delay
-	},
+  get: {
+    '/': messages.home,
+    '/messages': messages.list,
+    '/messages/:id': messages.fetch,
+    '/async': messages.delay
+  },
 
-	post: {
-		'/messages': messages.create
-	}
+  post: {
+    '/messages': messages.create
+  }
 };
