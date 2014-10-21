@@ -35,7 +35,7 @@ View.prototype.setMediaType = function () {
     case 'html':
     case 'text':
       this.mediaType = this.context.type = mediaType;
-    break;
+      break;
     default:
       this.context.throw(406, 'Cannot serve media type ' + mediaType);
   }
