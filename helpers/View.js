@@ -6,23 +6,10 @@ let
 
 
 function View(template, content, options) {
-  // if (!context) {
-  //   throw new Error('Context is required');
-  // }
-
-  if (!options) {
-    options = {};
-  }
-
-  _.defaults(options, this.defaults);
-  
-  _.defaults(this, { 
+  _.defaults(this, {
     template: template,
     content: content
-  },  options);
-
-  // this.setStatus();
-  // this.setMediaType();
+  }, options || {}, this.defaults);
 }
 
 View.prototype.defaults = {
