@@ -43,7 +43,12 @@ View.prototype.setMediaType = function () {
   return this;
 };
 
-View.prototype.render = function () {
+View.prototype.render = function (context) {
+  this
+    .setContext(context)
+    .setStatus()
+    .setMediaType();
+    
   return this[this.mediaType]();
 };
 

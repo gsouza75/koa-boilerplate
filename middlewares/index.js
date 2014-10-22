@@ -12,11 +12,7 @@ module.exports = {
       let errorView = new ErrorView('error', err),
         rendered;
 
-        rendered = errorView
-          .setContext(this)
-          .setStatus()
-          .setMediaType()
-          .render();
+        rendered = errorView.render(this);
       
       this.body = typeof rendered === 'string' ? 
         rendered : 
