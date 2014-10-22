@@ -6,12 +6,16 @@ let
   viewEngine = require('co-views');
 
 
+let env = process.env;
+
 function Config() {
   _.defaults(this, this.defaults);
-  this.applyOverride();
+  _.merge(this, this.getHomeConfig());
 }
 
 Config.prototype.defaults = {
+  homeDir: env.HOME || env.HOMEPATH || env.USERPROFILE,
+
   name: 'koa-boilerplate-app',
 
   port: 3000,
@@ -28,24 +32,18 @@ Config.prototype.defaults = {
   }
 };
 
-Config.prototype.applyOverride = function () {
-  let userHome = this.getUserHome(),
-    configPath = path.join(userHome, '.' + this.name),
-    profileOverrides;
+Config.prototype.getHomeConfig = function () {
+  let configPath = path.join(this.homeDir, '.' + this.name),
+    profileOverrides = {};
 
   try {
     profileOverrides = require(configPath);
-    _.merge(this, profileOverrides);
-    console.log('Applied config override in %s.', configPath);
+    console.log('Found home config in %s.', configPath);
   } catch (err) {
-    console.log('No config override found in %s.', configPath);
+    console.log('No home config found in %s.', configPath);
   }
-};
 
-Config.prototype.getUserHome = function () {
-  return process.env.HOME || 
-    process.env.HOMEPATH || 
-    process.env.USERPROFILE;
+  return profileOverrides;
 };
 
 
