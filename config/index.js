@@ -34,16 +34,16 @@ Config.prototype.defaults = {
 
 Config.prototype.getHomeConfig = function () {
   let configPath = path.join(this.homeDir, '.' + this.name),
-    profileOverrides = {};
+    homeConfig = {};
 
   try {
-    profileOverrides = require(configPath);
+    homeConfig = require(configPath);
     console.log('Found home config in %s.', configPath);
   } catch (err) {
     console.log('No home config found in %s.', configPath);
   }
 
-  return profileOverrides;
+  return homeConfig;
 };
 
 
