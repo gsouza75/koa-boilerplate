@@ -40,7 +40,7 @@ Config.prototype.getHomeConfig = function () {
     homeConfig = require(configPath);
     console.log('Found home config in %s.', configPath);
   } catch (err) {
-    console.log('No home config found in %s.', configPath);
+    console.log('No home config found in %s. %s', configPath, err);
   }
 
   return homeConfig;
