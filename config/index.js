@@ -3,10 +3,10 @@
 let 
   _ = require('lodash'),
   path = require('path'),
-  viewEngine = require('co-views');
+  viewEngine = require('co-views'),
 
-
-let env = process.env;
+  env = process.env;
+  
 
 function Config() {
   _.defaults(this, this.defaults);
