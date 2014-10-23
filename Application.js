@@ -34,25 +34,29 @@ App.prototype.applyCustomMiddlewares = function () {
 };
 
 App.prototype.applyRouteHandlers = function () {
-  let self = this;
+
+  // Make a route-handling generator wrapper
+  // given a handler function.
+  function generateHandlerWrapper(fnHandler) {
+    return function *() {
+      let returnValue = fnHandler.apply(this, arguments);
+
+      if (returnValue instanceof View) {
+        returnValue = returnValue.render(this);
+      }
+
+      this.body = typeof returnValue === 'string' ?
+        returnValue :
+        yield returnValue;
+    };
+  }
 
   for (let verb in this.routes) {
     let handlers = this.routes[verb];
 
     for (let urlPath in handlers) {
       let handler = handlers[urlPath];
-
-      this.koaApp.use(route[verb](urlPath, function *() {
-        let returnValue = handler.apply(this, arguments);
-
-        if (returnValue instanceof View) {
-          returnValue = returnValue.render(this);
-        }
-
-        this.body = typeof returnValue === 'string' ?
-          returnValue :
-          yield returnValue;
-      }));
+      this.koaApp.use(route[verb](urlPath, generateHandlerWrapper(handler)));
     }
   }
 };
